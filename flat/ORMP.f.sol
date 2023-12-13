@@ -17,57 +17,6 @@
 
 pragma solidity 0.8.20;
 
-// This file is part of Darwinia.
-// Copyright (C) 2018-2023 Darwinia Network
-// SPDX-License-Identifier: GPL-3.0
-//
-// Darwinia is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Darwinia is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
-
-// This file is part of Darwinia.
-// Copyright (C) 2018-2023 Darwinia Network
-// SPDX-License-Identifier: GPL-3.0
-//
-// Darwinia is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Darwinia is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
-
-// This file is part of Darwinia.
-// Copyright (C) 2018-2023 Darwinia Network
-// SPDX-License-Identifier: GPL-3.0
-//
-// Darwinia is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Darwinia is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
-
 /// @dev The block of control information and data for comminicate
 /// between user applications. Messages are the exchange medium
 /// used by channels to send and receive data through cross-chain networks.
@@ -176,23 +125,6 @@ contract UserConfig {
         return c;
     }
 }
-
-// This file is part of Darwinia.
-// Copyright (C) 2018-2023 Darwinia Network
-// SPDX-License-Identifier: GPL-3.0
-//
-// Darwinia is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Darwinia is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
 
 interface IVerifier {
     /// @notice Fetch message root oracle.
@@ -514,23 +446,6 @@ contract Channel is UserConfig {
     }
 }
 
-// This file is part of Darwinia.
-// Copyright (C) 2018-2023 Darwinia Network
-// SPDX-License-Identifier: GPL-3.0
-//
-// Darwinia is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Darwinia is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
-
 interface IOracle is IVerifier {
     /// @notice Fetch oracle price to relay message root to the destination chain.
     /// @param toChainId The destination chain id.
@@ -542,23 +457,6 @@ interface IOracle is IVerifier {
     /// @param msgHash Hash of the message.
     function assign(bytes32 msgHash) external payable;
 }
-
-// This file is part of Darwinia.
-// Copyright (C) 2018-2023 Darwinia Network
-// SPDX-License-Identifier: GPL-3.0
-//
-// Darwinia is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Darwinia is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
 
 interface IRelayer {
     /// @notice Fetch relayer price to relay message to the destination chain.
