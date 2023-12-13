@@ -10,6 +10,13 @@ Oracle and Relayer based Message Protocol.
 | Relayer    | 0x0000000000808fE9bDCc1d180EfbF5C53552a6b1 |
 | MsgDAO     | 0x000000000879926D12aF396788C0785B7e581e53 |
 
+#### Tron shasta
+| Contract     | Deployment Address                 |
+| ------------ | ---------------------------------- |
+| ORMP         | TXzW7Zo6CNAS2c6VKJx1xpfeGxcshQGHMm |
+| Oracle       | TL8opa8ZgxpPhWm4CW7xxkuZWcbERxFYNv |
+| Relayer      | TXoHifzQNtyfhGckxK4ZHp9w7yim8iZXZ8 |
+
 ## Usage
 To install with [**Foundry**](https://github.com/gakonst/foundry):
 ```sh
