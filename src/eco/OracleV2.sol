@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
 
-pragma solidity 0.8.17;
+pragma solidity 0.8.20;
 
 import "../Verifier.sol";
 import "../interfaces/IFeedOracle.sol";
@@ -75,6 +75,6 @@ contract OracleV2 is Verifier {
     }
 
     function merkleRoot(uint256 chainId, uint256 blockNumber) public view override returns (bytes32) {
-        return rootOf[chaindId][blockNumber];
+        return rootOf[chainId][blockNumber];
     }
 }

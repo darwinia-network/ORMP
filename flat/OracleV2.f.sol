@@ -303,6 +303,6 @@ contract OracleV2 is Verifier {
     }
 
     function merkleRoot(uint256 chainId, uint256 blockNumber) public view override returns (bytes32) {
-        return rootOf[chaindId][blockNumber];
+        return rootOf[chainId][blockNumber];
     }
 }
