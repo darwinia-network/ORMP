@@ -14,7 +14,7 @@ Oracle and Relayer based Message Protocol.
 | Contract     | Deployment Address                 |
 | ------------ | ---------------------------------- |
 | ORMP         | TXzW7Zo6CNAS2c6VKJx1xpfeGxcshQGHMm |
-| Oracle       | TL8opa8ZgxpPhWm4CW7xxkuZWcbERxFYNv |
+| OracleV2     | TDACQR5FUtNpuBS2g85WKiucvrAWhY6zzs |
 | Relayer      | TXoHifzQNtyfhGckxK4ZHp9w7yim8iZXZ8 |
 
 ## Usage

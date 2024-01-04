@@ -51,11 +51,6 @@ contract OracleV2 is Verifier {
         emit ImporedMessageRoot(chainId, blockNumber, messageRoot);
     }
 
-    function withdraw(address to, uint256 amount) external onlyOwner {
-        (bool success,) = to.call{value: amount}("");
-        require(success, "!withdraw");
-    }
-
     function changeOwner(address owner_) external onlyOwner {
         owner = owner_;
     }
@@ -71,6 +66,8 @@ contract OracleV2 is Verifier {
 
     function assign(bytes32 msgHash) external payable {
         require(msg.sender == PROTOCOL, "!auth");
+        (bool success,) = owner.call{value: msg.value}("");
+        require(success, "!transfer");
         emit Assigned(msgHash, msg.value);
     }
 
