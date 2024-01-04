@@ -17,6 +17,40 @@
 
 pragma solidity 0.8.20;
 
+// This file is part of Darwinia.
+// Copyright (C) 2018-2023 Darwinia Network
+// SPDX-License-Identifier: GPL-3.0
+//
+// Darwinia is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Darwinia is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
+
+// This file is part of Darwinia.
+// Copyright (C) 2018-2023 Darwinia Network
+// SPDX-License-Identifier: GPL-3.0
+//
+// Darwinia is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Darwinia is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
+
 interface IVerifier {
     /// @notice Fetch message root oracle.
     /// @param chainId The destination chain id.
@@ -244,6 +278,23 @@ abstract contract Verifier is IVerifier {
     }
 }
 
+// This file is part of Darwinia.
+// Copyright (C) 2018-2023 Darwinia Network
+// SPDX-License-Identifier: GPL-3.0
+//
+// Darwinia is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Darwinia is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Darwinia. If not, see <https://www.gnu.org/licenses/>.
+
 interface IFeedOracle {
     function messageRootOf(uint256 chainid) external view returns (bytes32);
 }
@@ -279,11 +330,6 @@ contract OracleV2 is Verifier {
         emit ImporedMessageRoot(chainId, blockNumber, messageRoot);
     }
 
-    function withdraw(address to, uint256 amount) external onlyOwner {
-        (bool success,) = to.call{value: amount}("");
-        require(success, "!withdraw");
-    }
-
     function changeOwner(address owner_) external onlyOwner {
         owner = owner_;
     }
@@ -299,6 +345,8 @@ contract OracleV2 is Verifier {
 
     function assign(bytes32 msgHash) external payable {
         require(msg.sender == PROTOCOL, "!auth");
+        (bool success,) = owner.call{value: msg.value}("");
+        require(success, "!transfer");
         emit Assigned(msgHash, msg.value);
     }
 
