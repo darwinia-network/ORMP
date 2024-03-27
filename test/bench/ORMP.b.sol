@@ -21,14 +21,14 @@ import "forge-std/Test.sol";
 import {Chains} from "create3-deploy/script/Chains.sol";
 import "../../src/Verifier.sol";
 import "../../src/ORMP.sol";
-import "../../src/eco/ORMPOracle.sol";
+import "../../src/eco/Oracle.sol";
 import "../../src/eco/Relayer.sol";
 
 contract ORMPBenchmarkTest is Test {
     using Chains for uint256;
 
     ORMP ormp = ORMP(0x00000000001523057a05d6293C1e5171eE33eE0A);
-    ORMPOracle oracle = ORMPOracle(payable(0x0000000003ebeF32D8f0ED406a5CA8805c80AFba));
+    Oracle oracle = Oracle(payable(0x0000000003ebeF32D8f0ED406a5CA8805c80AFba));
     Relayer relayer = Relayer(payable(0x0000000000808fE9bDCc1d180EfbF5C53552a6b1));
 
     address immutable self = address(this);

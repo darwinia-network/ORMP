@@ -1,7 +1,7 @@
 # ORMP
 Oracle and Relayer based Message Protocol.
 
-## Deployments
+## V1 Deployments
 ### Canonical Cross-chain Deployment Addresses
 |  Contract  |  Canonical Cross-chain Deployment Address  |
 |------------|--------------------------------------------|

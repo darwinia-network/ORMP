@@ -58,6 +58,10 @@ contract Relayer {
         owner = dao;
     }
 
+    function version() public pure returns (string memory) {
+        return "2.0.0";
+    }
+
     receive() external payable {}
 
     function withdraw(address to, uint256 amount) external onlyApproved {

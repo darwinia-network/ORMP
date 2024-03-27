@@ -27,7 +27,7 @@ contract OracleTest is Test {
     receive() external payable {}
 
     function setUp() public {
-        oracle = new Oracle(self, self, self);
+        oracle = new Oracle(self, self);
         oracle.setApproved(self, true);
     }
 
@@ -71,7 +71,7 @@ contract OracleTest is Test {
         assertEq(r, bytes32(uint256(1)));
     }
 
-    function messageRootOf(uint256) external pure returns (bytes32) {
+    function merkleRoot(uint256, uint256) external pure returns (bytes32) {
         return bytes32(uint256(1));
     }
 }

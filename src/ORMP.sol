@@ -36,6 +36,10 @@ contract ORMP is ReentrancyGuard, Channel {
 
     constructor(address dao) Channel(dao) {}
 
+    function version() public pure returns (string memory) {
+        return "2.0.0";
+    }
+
     /// @dev Send a cross-chain message over the endpoint.
     /// @notice follow https://eips.ethereum.org/EIPS/eip-5750
     /// @param toChainId The Message destination chain id.

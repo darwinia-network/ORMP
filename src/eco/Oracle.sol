@@ -18,19 +18,20 @@
 pragma solidity 0.8.17;
 
 import "../Verifier.sol";
-import "../interfaces/IFeedOracle.sol";
 
 contract Oracle is Verifier {
     event SetFee(uint256 indexed chainId, uint256 fee);
     event SetApproved(address operator, bool approve);
-
-    address public immutable PROTOCOL;
-    address public immutable SUBAPI;
+    event Withdrawal(address indexed to, uint256 amt);
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event ImportedMessageRoot(uint256 indexed chainId, uint256 indexed blockHeight, bytes32 messageRoot);
 
     address public owner;
     // chainId => price
     mapping(uint256 => uint256) public feeOf;
-    // chainId => dapi
+    // chainId => blockNumber => messageRoot
+    mapping(uint256 => mapping(uint256 => bytes32)) rootOf;
+    // operator => isApproved
     mapping(address => bool) public approvedOf;
 
     modifier onlyOwner() {
@@ -43,30 +44,45 @@ contract Oracle is Verifier {
         _;
     }
 
-    constructor(address dao, address ormp, address subapi) {
-        SUBAPI = subapi;
-        PROTOCOL = ormp;
+    constructor(address dao) {
         owner = dao;
     }
 
     receive() external payable {}
 
-    function withdraw(address to, uint256 amount) external onlyApproved {
-        (bool success,) = to.call{value: amount}("");
-        require(success, "!withdraw");
+    function version() public pure returns (string memory) {
+        return "2.0.0";
+    }
+
+    /// @dev Only could be called by owner.
+    /// @notice Each channel has a corresponding oracle, and the message root should match with it.
+    /// @param chainId The source chain id.
+    /// @param blockNumber The source chain block number.
+    /// @param messageRoot The source chain message root corresponding to the channel.
+    function importMessageRoot(uint256 chainId, uint256 blockNumber, bytes32 messageRoot) external onlyOwner {
+        rootOf[chainId][blockNumber] = messageRoot;
+        emit ImportedMessageRoot(chainId, blockNumber, messageRoot);
+    }
+
+    function changeOwner(address newOwner) external onlyOwner {
+        address oldOwner = owner;
+        owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+
+    function setApproved(address operator, bool approve) external onlyOwner {
+        approvedOf[operator] = approve;
+        emit SetApproved(operator, approve);
     }
 
     function isApproved(address operator) public view returns (bool) {
         return approvedOf[operator];
     }
 
-    function changeOwner(address owner_) external onlyOwner {
-        owner = owner_;
-    }
-
-    function setApproved(address operator, bool approve) external onlyOwner {
-        approvedOf[operator] = approve;
-        emit SetApproved(operator, approve);
+    function withdraw(address to, uint256 amount) external onlyApproved {
+        (bool success,) = to.call{value: amount}("");
+        require(success, "!withdraw");
+        emit Withdrawal(to, amount);
     }
 
     function setFee(uint256 chainId, uint256 fee_) external onlyApproved {
@@ -75,10 +91,12 @@ contract Oracle is Verifier {
     }
 
     function fee(uint256 toChainId, address /*ua*/ ) public view returns (uint256) {
-        return feeOf[toChainId];
+        uint256 f = feeOf[toChainId];
+        require(f != 0, "!fee");
+        return f;
     }
 
-    function merkleRoot(uint256 chainId, uint256 /*blockNumber*/ ) public view override returns (bytes32) {
-        return IFeedOracle(SUBAPI).messageRootOf(chainId);
+    function merkleRoot(uint256 chainId, uint256 blockNumber) public view override returns (bytes32) {
+        return rootOf[chainId][blockNumber];
     }
 }

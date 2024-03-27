@@ -9,7 +9,7 @@ import {ScriptTools} from "create3-deploy/script/ScriptTools.sol";
 
 import {ORMP} from "../../src/ORMP.sol";
 import {Relayer} from "../../src/eco/Relayer.sol";
-import {ORMPOracle} from "../../src/eco/ORMPOracle.sol";
+import {Oracle} from "../../src/eco/Oracle.sol";
 
 interface III {
     function PROTOCOL() external view returns (address);
@@ -101,7 +101,7 @@ contract Deploy is Common {
 
     /// @notice Deploy the Oracle
     function deployOralce() public broadcast returns (address) {
-        bytes memory byteCode = type(ORMPOracle).creationCode;
+        bytes memory byteCode = type(Oracle).creationCode;
         bytes memory initCode = bytes.concat(byteCode, abi.encode(deployer, ORMP_ADDR));
         address oracle = _deploy3(ORACLE_SALT, initCode);
         require(oracle == ORACLE_ADDR, "!oracle");
